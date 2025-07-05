@@ -3,7 +3,7 @@ from src.datascience import logger
 import pandas as pd
 from src.datascience.entity.config_entity import ModelTrainerConfig
 from src.datascience import logger
-from sklearn.linear_model import ElasticNet
+from sklearn.ensemble import RandomForestRegressor
 import joblib
 
 class ModelTrainer:
@@ -21,7 +21,8 @@ class ModelTrainer:
         test_y = test_data[[self.config.target_column]]
 
 
-        lr = ElasticNet(alpha=self.config.alpha, l1_ratio=self.config.l1_ratio, random_state=42)
+        lr = RandomForestRegressor(n_estimators=self.config.n_estimators, max_depth=self.config.max_depth,min_samples_split=self.config.min_samples_split,min_samples_leaf=self.config.min_samples_leaf,max_features=self.config.max_features, random_state=42)
+
         lr.fit(train_x, train_y)
 
         joblib.dump(lr, os.path.join(self.config.root_dir, self.config.model_name))

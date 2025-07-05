@@ -57,7 +57,7 @@ class ModelEvaluation:
 
             # Model registry does not work with file store
             if tracking_url_type_store != "file":
-                mlflow.sklearn.log_model(sk_model=model, name="model",input_example=test_x.sample(n=5),registered_model_name="ElasticnetModel")
+                mlflow.sklearn.log_model(sk_model=model, artifact_path="model",input_example=test_x.sample(n=5))
             else:
-                mlflow.sklearn.log_model(sk_model=model,name="model",input_example=test_x.sample(n=5))
+                mlflow.sklearn.log_model(sk_model=model,artifact_path="model",input_example=test_x.sample(n=5))
     
